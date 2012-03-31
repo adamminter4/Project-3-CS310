@@ -1,0 +1,12 @@
+1. Why does prove-simple use mapcan as the list mapping operator? 
+Hint: "nil".
+
+2.  The following functions all return lists of multiple bindings: 
+prove-simple, prove-and, prove-or, prove-not. 
+Why don't we just return one binding? 
+
+3. Given an example of "r" before and after it is processed by change-vars.
+
+4. The function prove-code evals a structure called code that creates a 
+let statement which defines some vars (local variables) then calls some 
+code expr. What is going on here?  

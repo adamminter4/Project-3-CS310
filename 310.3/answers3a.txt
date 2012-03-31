@@ -1,0 +1,17 @@
+1. (match '?x 1 nil) returns the following:
+((?X . 1))
+T
+
+2. Why does the match function return two values?
+
+3. Give an example for the kind of structure that would satisfy var.
+
+4. Give an example for the kind of structure that would not satisfy var.
+
+5. Why does binding call itself recursively before it looks at the cdr of the
+current binding? 
+
+6. The function data1 includes a predicate 'sameSex' that matches to two
+persons. Except for gender, every other field has a suffix that is either
+'1' or '2'. Does gender need a suffix? Why or why not?
+
