@@ -11,9 +11,12 @@ would, for instance, return only one of the parents. Returning multiple
 bindings will return both bindings containing both parents in question.
 
 3. Given an example of "r" before and after it is processed by change-vars.
-Before: ?adam
-After: !adam
+Each expression is rehashed using the value passed in for r. 
 
 4. The function prove-code evals a structure called code that creates a 
 let statement which defines some vars (local variables) then calls some 
 code expr. What is going on here?  
+The let creates the list of bindings that hold each variable, code creates
+the code block that declares each binding, inserting the expression inside
+each. Prove-code returns the entire expression with each binding set in an 
+environment.
