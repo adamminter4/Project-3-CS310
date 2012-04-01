@@ -3,15 +3,25 @@
 T
 
 2. Why does the match function return two values?
+The first return is a list of associated lists that show each match found. The
+second return is a flag T or nil, indicating whether or not the match was
+successful.
 
 3. Give an example for the kind of structure that would satisfy var.
+?adam_minter
 
 4. Give an example for the kind of structure that would not satisfy var.
+adam_minter
 
 5. Why does binding call itself recursively before it looks at the cdr of the
 current binding? 
+This function has to be recursive, becasue matching can build up binding lists
+in which a variable is only indirectly associated with it's value: ?x might be
+bound to an in virtue of the list containing both (?x . ?y) and (?y . a).
+(p. 250)
 
 6. The function data1 includes a predicate 'sameSex' that matches to two
 persons. Except for gender, every other field has a suffix that is either
 '1' or '2'. Does gender need a suffix? Why or why not?
-
+Gender can only have 2 different values, male or female. There isn't any other
+option, so there doesn't need to be any extra organization to the rule.
