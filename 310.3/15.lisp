@@ -42,7 +42,10 @@ what do you expect of 100 lines of code.
      (and          (prove-and (reverse (cdr expr)) binds))
      (or           (prove-or  (cdr expr) binds))
      (not          (prove-not (cadr expr) binds))
-     (t            (prove-simple (car expr) (cdr expr) binds))))
+     (t            (prove-simple (car expr) (cdr expr) binds))
+     (is           (prove-is binds))   
+     (do           (prove-do binds))
+     (say          (prove-say binds)))) 
 
 (defun prove-code (expr binds)
   (labels ((lets (binds want)
@@ -89,6 +92,13 @@ what do you expect of 100 lines of code.
 (defun prove-not (clause binds)
   (unless (prove clause binds)
     (list binds)))
+
+(defun prove-is (binds))
+
+(defun prove-do (binds))
+
+(defun prove-say (binds))
+
 
 (defmacro with-answer (query &body body)
   (let ((binds (gensym)))
@@ -148,4 +158,19 @@ what do you expect of 100 lines of code.
   (with-output-to-string (s)
     (with-answer (hates ?x ?y)
       (format s "~a hates ~a~%" ?x ?y))))
-  
+
+(deftest !age ()
+  (data-ages)
+  (let ((x 0))
+    (with-answer (age ?a)
+      (incf x ?a))
+    (format t "~a" x)
+    (test 293 x)))
+      
+(defun data-ages ()
+  (clrhash *rules*)
+  (<- (person matt  m  23  40000))
+  (<- (person dean  m  90  90000))
+  (<- (person clint m 100 100000000))
+  (<- (person marge f  80 100000000))
+  (<- (age ?a) (and (person ?x ?gender ?a ?salary1))))
