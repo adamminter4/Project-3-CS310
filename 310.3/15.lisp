@@ -39,14 +39,16 @@ what do you expect of 100 lines of code.
 (defun prove (expr &optional binds)
   (case (car expr)
     ; cs310 students! insert new code here
+     (do           (prove-code (second expr) binds) (list binds))
+     (say          (prove-code expr binds) (list binds)) 
+     (>            (prove-operator (car expr) (cdr expr) binds))
+     (<            (prove-operator (car expr) (cdr expr) binds))  
      (and          (prove-and (reverse (cdr expr)) binds))
      (or           (prove-or  (cdr expr) binds))
      (not          (prove-not (cadr expr) binds))
-     (t            (prove-simple (car expr) (cdr expr) binds))
-     (>            (prove-operator (car expr) (cdr expr) binds))
-     (is           (prove-is binds))   
-     (do           (prove-do binds))
-     (say          (prove-say binds)))) 
+     (t            (prove-simple (car expr) (cdr expr) binds))))
+  
+
 
 (defun prove-code (expr binds)
   (labels ((lets (binds want)
@@ -97,12 +99,8 @@ what do you expect of 100 lines of code.
 (defun prove-operator (operator args binds)
   (when (prove-code (cons operator args) binds) (list binds)))
 
-(defun prove-is (binds))
-
-(defun prove-do (binds))
-
-(defun prove-say (binds))
-
+;(defun prove-is (arg1 arg2 binds)
+;  (prove-code (match arg1 arg2 binds))(list binds)) 
 
 (defmacro with-answer (query &body body)
   (let ((binds (gensym)))
