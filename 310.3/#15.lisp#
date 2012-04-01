@@ -44,9 +44,10 @@ what do you expect of 100 lines of code.
      (not          (prove-not (cadr expr) binds))
      (t            (prove-simple (car expr) (cdr expr) binds))
      (>            (prove-operator (car expr) (cdr expr) binds))
-     (is           (prove-is binds))   
-     (do           (prove-do binds))
-     (say          (prove-say binds)))) 
+     (<            (prove-operator (cdr expr) (car expr) binds))
+     (is           (list (prove-is (second expr) (third expr) binds)))   
+     (do           (prove-code (second expr) binds) (list binds))
+     (say          (prove-code expr binds) (list binds)))) 
 
 (defun prove-code (expr binds)
   (labels ((lets (binds want)
@@ -96,13 +97,6 @@ what do you expect of 100 lines of code.
 
 (defun prove-operator (operator args binds)
   (when (prove-code (cons operator args) binds) (list binds)))
-
-(defun prove-is (binds))
-
-(defun prove-do (binds))
-
-(defun prove-say (binds))
-
 
 (defmacro with-answer (query &body body)
   (let ((binds (gensym)))

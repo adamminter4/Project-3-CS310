@@ -1,3 +1,5 @@
 1. In ‘15.lisp’, the equality test is handled a funny way: (<- (= ?x ?x)). 
 Is that a typo? Should not the second "?x" be different to the first? 
 And should there be a body to the rule?
+It's not a typo. A variable is always equal to itself, so it needs to stay as
+is.
